@@ -167,6 +167,10 @@ export const resetPassword = async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
 
+    if (!password) {
+      return res.status(400).json({ message: "Password is required" });
+    }
+
     const user = await User.findOne({
       resetpasswordToken: token,
       resetpasswordExpires: { $gt: Date.now() }, // Check if the token is still valid
