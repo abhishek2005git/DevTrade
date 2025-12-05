@@ -36,12 +36,9 @@ export const signup = async (req, res) => {
     try {
         await sendVerificationEmail(user.email, verificationToken);
     } catch (emailError) {
-        // Log the specific Resend error so you can see it in the terminal
         console.error("Resend Failed:", emailError);
-        
-        // OPTIONAL: Delete the user if email fails, so they can try again
-        // await User.findByIdAndDelete(user._id);
-        // return res.status(500).json({ message: "Error sending email, please try again" });
+        await User.findByIdAndDelete(user._id);
+        return res.status(500).json({ message: "Error sending verification email. Please try again." });
     }
 
     return res.status(201).json({
