@@ -24,3 +24,4 @@ export const logoutUser = async(data) => {
     const res = await api.post("/auth/logout", data)
     return res.data
 }
+
