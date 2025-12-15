@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
 
 import { uploadProject } from "@/api/project.api";
-import { uploadToCloudinary } from "@/utils/uploadToCloudinary";
+import { uploadToCloudinary, uploadZipToCloudinary } from "@/utils/uploadToCloudinary";
 
 export default function UploadProject() {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ export default function UploadProject() {
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
-    const url = await uploadToCloudinary(file);
+    const url = await uploadZipToCloudinary(file);
     setForm({ ...form, fileUrl: url });
     toast.success("Project file uploaded!");
   };
@@ -119,7 +119,7 @@ export default function UploadProject() {
               <Input
                 type="number"
                 name="price"
-                placeholder="100"
+                placeholder="$100"
                 className="bg-gray-900 border-gray-700 text-white"
                 onChange={handleChange}
                 required
