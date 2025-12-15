@@ -72,16 +72,17 @@ export const getProjectById = async (req, res) => {
 };
 
 export const uploadProject = async (req, res) => {
-  const {
-    title,
-    description,
-    price,
-    techStack,
-    category,
-    thumbnail,
-    images,
-    fileUrl,
-  } = req.body;
+    const { 
+      title, 
+      description, 
+      price, 
+      techStack, 
+      category, 
+      thumbnail, // Frontend sent this as a URL string
+      images,    // Frontend sent this as an array of URL strings
+      fileUrl    // Frontend sent this as a URL string
+    } = req.body;
+
 
   try {
     if (!title || !description || !price || !fileUrl)
